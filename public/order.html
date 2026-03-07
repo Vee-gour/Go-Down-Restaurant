@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoDown | Place Your Order</title>
+  <meta name="description" content="Order your favorite GoDown meals online." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="order-hero">
+    <nav class="nav container">
+      <a href="index.html" class="logo">Go<span>Down</span></a>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html#menu">Menu</a></li>
+        <li><a href="order.html">Order</a></li>
+        <li><a href="index.html#reserve">Reserve</a></li>
+        <li><a href="index.html#location">Location</a></li>
+      </ul>
+    </nav>
+
+    <div class="container order-hero-content">
+      <p class="tag">Quick Ordering</p>
+      <h1>Pick your favorites and place your order in minutes.</h1>
+      <p class="hero-copy">Perfect for takeaway or planning your next meal at GoDown.</p>
+    </div>
+  </header>
+
+  <main class="section container">
+    <div class="order-layout">
+      <section class="order-menu">
+        <h2>Choose Items</h2>
+        <div class="order-grid">
+          <article class="order-card">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" alt="Loaded pepperoni pizza" />
+            <h3>Loaded Pepperoni Pizza</h3>
+            <p>KES 1,250</p>
+            <button class="btn btn-primary add-btn" data-item="Loaded Pepperoni Pizza" data-price="1250" type="button">Add to Order</button>
+          </article>
+          <article class="order-card">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" alt="GoDown classic burger" />
+            <h3>GoDown Classic Burger</h3>
+            <p>KES 950</p>
+            <button class="btn btn-primary add-btn" data-item="GoDown Classic Burger" data-price="950" type="button">Add to Order</button>
+          </article>
+          <article class="order-card">
+            <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=80" alt="Crispy chips basket" />
+            <h3>Crispy Chips Basket</h3>
+            <p>KES 420</p>
+            <button class="btn btn-primary add-btn" data-item="Crispy Chips Basket" data-price="420" type="button">Add to Order</button>
+          </article>
+          <article class="order-card">
+            <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80" alt="Chicken shawarma wrap" />
+            <h3>Chicken Shawarma Wrap</h3>
+            <p>KES 780</p>
+            <button class="btn btn-primary add-btn" data-item="Chicken Shawarma Wrap" data-price="780" type="button">Add to Order</button>
+          </article>
+          <article class="order-card">
+            <img src="https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=900&q=80" alt="Spicy BBQ wings" />
+            <h3>Spicy BBQ Wings</h3>
+            <p>KES 860</p>
+            <button class="btn btn-primary add-btn" data-item="Spicy BBQ Wings" data-price="860" type="button">Add to Order</button>
+          </article>
+          <article class="order-card">
+            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80" alt="Tropical passion cooler" />
+            <h3>Tropical Passion Cooler</h3>
+            <p>KES 450</p>
+            <button class="btn btn-primary add-btn" data-item="Tropical Passion Cooler" data-price="450" type="button">Add to Order</button>
+          </article>
+        </div>
+      </section>
+
+      <aside class="order-summary">
+        <h2>Your Order</h2>
+        <ul id="order-items" class="order-items"></ul>
+        <p class="order-empty" id="order-empty">No items added yet.</p>
+        <div class="order-total">Total: <strong id="order-total">KES 0</strong></div>
+
+        <form id="order-form" class="order-form">
+          <label for="customer-name">Name</label>
+          <input id="customer-name" name="customer-name" type="text" required placeholder="Your name" />
+
+          <label for="customer-phone">Phone</label>
+          <input id="customer-phone" name="customer-phone" type="tel" required placeholder="07XX XXX XXX" />
+
+          <label for="delivery-type">Order Type</label>
+          <select id="delivery-type" name="delivery-type" required>
+            <option value="">Select</option>
+            <option value="Takeaway">Takeaway</option>
+            <option value="Dine In">Dine In</option>
+          </select>
+
+          <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> GoDown.</p>
+      <p><a href="index.html">Back to Home</a></p>
+    </div>
+  </footer>
+
+  <div id="order-popup" class="popup">
+    <div class="popup-card">
+      <h3>Order Received</h3>
+      <p>Your order has been placed successfully. Thank you for choosing GoDown.</p>
+      <button id="order-popup-close" class="btn btn-primary" type="button">Great</button>
+    </div>
+  </div>
+
+  <script>document.getElementById('year').textContent=new Date().getFullYear();let t=0;document.querySelectorAll('.add-btn').forEach(b=>b.onclick=()=>{t+=Number(b.dataset.price);document.getElementById('order-total').textContent='KES '+t.toLocaleString();document.getElementById('order-empty').style.display='none';});document.getElementById('order-form').onsubmit=e=>{e.preventDefault();if(!t)return alert('Please add an item first.');alert('Order placed successfully!');e.target.reset();document.getElementById('order-total').textContent='KES 0';document.getElementById('order-empty').style.display='block';t=0;};</script>
+</body>
+</html>
+

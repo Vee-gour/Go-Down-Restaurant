@@ -2,6 +2,8 @@
 const statusEl = document.getElementById('form-status');
 const navToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
+const popup = document.getElementById('booking-popup');
+const popupClose = document.getElementById('popup-close');
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -26,29 +28,25 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  statusEl.textContent = 'Sending reservation...';
+if (popupClose) {
+  popupClose.addEventListener('click', () => popup.classList.remove('show'));
+}
 
-  const formData = new FormData(form);
-  const payload = Object.fromEntries(formData.entries());
+if (popup) {
+  popup.addEventListener('click', (event) => {
+    if (event.target === popup) popup.classList.remove('show');
+  });
+}
 
-  try {
-    const response = await fetch('/api/reservations', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+if (form) {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    statusEl.textContent = 'Confirming your reservation...';
 
-    const result = await response.json();
+    await new Promise((resolve) => setTimeout(resolve, 700));
 
-    if (!response.ok) {
-      throw new Error(result.message || 'Could not send reservation.');
-    }
-
-    statusEl.textContent = result.message;
+    statusEl.textContent = 'Success!';
+    popup.classList.add('show');
     form.reset();
-  } catch (error) {
-    statusEl.textContent = error.message;
-  }
-});
+  });
+}

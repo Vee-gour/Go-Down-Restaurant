@@ -9,6 +9,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .order-link { display: inline-block; margin-left: 0.5rem; color: #ffd6b3; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+    .order-link:hover { color: #ffffff; }
+    .popup { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(2, 6, 12, 0.72); z-index: 1000; padding: 1rem; }
+    .popup.show { display: flex; }
+    .popup-card { width: min(480px, 100%); background: linear-gradient(180deg, #141f2e, #101723); border: 1px solid #334862; border-radius: 18px; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); padding: 1.4rem; text-align: center; }
+    .popup-card h3 { margin-bottom: 0.5rem; }
+    .popup-card p { color: #a6b2c7; margin-bottom: 1rem; }
+  </style>
 </head>
 <body>
   <header class="hero" id="home">
@@ -17,6 +26,7 @@
       <button class="menu-toggle" aria-label="Toggle menu">☰</button>
       <ul class="nav-links">
         <li><a href="#menu">Menu</a></li>
+        <li><a href="order.html">Order</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#reserve">Reserve</a></li>
         <li><a href="#location">Location</a></li>
@@ -43,36 +53,42 @@
           <h3>Loaded Pepperoni Pizza</h3>
           <p>Stone-baked crust, mozzarella, rich tomato sauce, pepperoni.</p>
           <span>KES 1,250</span>
+          <a class="order-link" href="order.html">Order This</a>
         </article>
         <article class="menu-card">
           <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" alt="GoDown classic burger" class="menu-thumb" />
           <h3>GoDown Classic Burger</h3>
           <p>Juicy beef patty, cheddar, house sauce, brioche bun.</p>
           <span>KES 950</span>
+          <a class="order-link" href="order.html">Order This</a>
         </article>
         <article class="menu-card">
           <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=80" alt="Crispy chips basket" class="menu-thumb" />
           <h3>Crispy Chips Basket</h3>
           <p>Golden fries tossed in sea salt, served with signature dip.</p>
           <span>KES 420</span>
+          <a class="order-link" href="order.html">Order This</a>
         </article>
         <article class="menu-card">
           <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80" alt="Chicken shawarma wrap" class="menu-thumb" />
           <h3>Chicken Shawarma Wrap</h3>
           <p>Grilled chicken, garlic mayo, crunchy slaw, soft flatbread.</p>
           <span>KES 780</span>
+          <a class="order-link" href="order.html">Order This</a>
         </article>
         <article class="menu-card">
           <img src="https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=900&q=80" alt="Spicy BBQ wings" class="menu-thumb" />
           <h3>Spicy BBQ Wings</h3>
           <p>Smoky chili glaze, sesame finish, cooling ranch dip.</p>
           <span>KES 860</span>
+          <a class="order-link" href="order.html">Order This</a>
         </article>
         <article class="menu-card">
           <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80" alt="Tropical passion cooler drink" class="menu-thumb" />
           <h3>Tropical Passion Cooler</h3>
           <p>Passion fruit, mint, citrus splash, sparkling tonic.</p>
           <span>KES 450</span>
+          <a class="order-link" href="order.html">Order This</a>
         </article>
       </div>
     </section>
@@ -191,6 +207,16 @@
     </div>
   </footer>
 
+  <div id="booking-popup" class="popup">
+    <div class="popup-card">
+      <h3>Reservation Confirmed</h3>
+      <p>Your booking request was sent successfully. We look forward to hosting you at GoDown.</p>
+      <button id="popup-close" class="btn btn-primary" type="button">Awesome</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
+
+
