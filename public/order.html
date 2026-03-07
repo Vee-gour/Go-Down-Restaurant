@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-<style>.order-layout{display:grid;grid-template-columns:1.45fr .8fr;gap:1rem;align-items:start}.order-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}.order-card,.order-summary{background:linear-gradient(180deg,#121a24,#182231);border:1px solid #2d3c54;border-radius:16px;padding:.9rem}.order-card img{height:110px;object-fit:cover;border-radius:11px;margin-bottom:.55rem}.order-summary{position:sticky;top:1rem}.order-items{max-height:220px;overflow:auto}@media(max-width:980px){.order-layout{grid-template-columns:1fr}.order-summary{position:static}}@media(max-width:760px){.order-grid{grid-template-columns:1fr}}</style></head>
+<style>.order-layout{display:grid;grid-template-columns:1.45fr .8fr;gap:1rem;align-items:start}.order-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}.order-card,.order-summary{background:linear-gradient(180deg,#121a24,#182231);border:1px solid #2d3c54;border-radius:16px;padding:.9rem}.order-card img{height:110px;object-fit:cover;border-radius:11px;margin-bottom:.55rem}.order-summary{position:sticky;top:1rem}.order-items{max-height:220px;overflow:auto}@media(max-width:980px){.order-layout{grid-template-columns:1fr}.order-summary{position:static}}@media(max-width:760px){.order-grid{grid-template-columns:1fr}}</style><style>.popup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(2,8,16,.72);z-index:9999}.popup.show{display:flex}.popup-card{width:min(480px,100%);background:linear-gradient(180deg,#141f2e,#101723);border:1px solid #334862;border-radius:18px;box-shadow:0 24px 48px rgba(0,0,0,.45);padding:1.3rem;text-align:center}.popup-card p{color:#a6b2c7;margin-bottom:.95rem}</style></head>
 <body>
   <header class="order-hero">
     <nav class="nav container">
@@ -110,14 +110,18 @@
   <div id="order-popup" class="popup">
     <div class="popup-card">
       <h3>Order Received</h3>
-      <p>Your order has been placed successfully. Thank you for choosing GoDown.</p>
+      <p id="order-popup-message">Your order has been placed successfully. Thank you for choosing GoDown.</p>
       <button id="order-popup-close" class="btn btn-primary" type="button">Great</button>
     </div>
   </div>
 
   <script>document.getElementById('year').textContent=new Date().getFullYear();let cart=[];const list=document.getElementById('order-items'),empty=document.getElementById('order-empty'),total=document.getElementById('order-total'),popup=document.getElementById('order-popup');document.querySelectorAll('.add-btn').forEach(b=>b.onclick=()=>{cart.push({n:b.dataset.item,p:Number(b.dataset.price)});list.innerHTML=cart.map(x=>'<li class="order-item">'+x.n+' - KES '+x.p.toLocaleString()+'</li>').join('');empty.style.display='none';total.textContent='KES '+cart.reduce((a,x)=>a+x.p,0).toLocaleString();});document.getElementById('order-popup-close').onclick=()=>popup.classList.remove('show');popup.onclick=e=>{if(e.target===popup)popup.classList.remove('show')};document.getElementById('order-form').onsubmit=e=>{e.preventDefault();if(!cart.length)return;popup.classList.add('show');cart=[];list.innerHTML='';empty.style.display='block';total.textContent='KES 0';e.target.reset();};</script>
-</body>
+<script>(function(){const form=document.getElementById("order-form"),popup=document.getElementById("order-popup"),msg=document.getElementById("order-popup-message"),list=document.getElementById("order-items"),empty=document.getElementById("order-empty"),total=document.getElementById("order-total");if(!form||!popup||!msg)return;form.onsubmit=function(e){e.preventDefault();const hasItems=list.children.length>0;if(!hasItems){msg.textContent="Please add at least one food item before placing your order.";popup.classList.add("show");return;}const orderType=(document.getElementById("delivery-type").value||"Order");msg.textContent="Success. Your "+orderType+" order has been received.";popup.classList.add("show");if(typeof cart!=="undefined")cart.length=0;list.innerHTML="";empty.style.display="block";total.textContent="KES 0";form.reset();};})();</script></body>
 </html>
+
+
+
+
 
 
 
