@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -23,7 +23,10 @@
   <header class="hero" id="home">
     <nav class="nav container">
       <a href="#home" class="logo">Go<span>Down</span></a>
-      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">Light Mode</button>
+        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+      </div>
       <ul class="nav-links">
         <li><a href="#menu">Menu</a></li>
         <li><a href="order.html">Order</a></li>
@@ -202,7 +205,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>© <span id="year"></span> GoDown.</p>
+      <p>Ã‚Â© <span id="year"></span> GoDown.</p>
       <p>Call: <a href="tel:0769090294">0769 090 294</a> | Open daily: 7:00 AM - 11:00 PM</p>
     </div>
   </footer>
@@ -215,6 +218,24 @@
     </div>
   </div>
 
+  <script>
+    (function () {
+      const themeToggle = document.getElementById('theme-toggle');
+      const applyTheme = (theme) => {
+        document.body.setAttribute('data-theme', theme);
+        if (themeToggle) themeToggle.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
+      };
+      const savedTheme = localStorage.getItem('godown-theme') || 'dark';
+      applyTheme(savedTheme);
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const nextTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+          localStorage.setItem('godown-theme', nextTheme);
+          applyTheme(nextTheme);
+        });
+      }
+    })();
+  </script>
   <script src="script.js"></script>
 </body>
 </html>

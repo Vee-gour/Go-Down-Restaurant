@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,7 +14,10 @@
   <header class="order-hero">
     <nav class="nav container">
       <a href="index.html" class="logo">Go<span>Down</span></a>
-      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">Light Mode</button>
+        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+      </div>
       <ul class="nav-links">
         <li><a href="index.html#menu">Menu</a></li>
         <li><a href="order.html">Order</a></li>
@@ -109,7 +112,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>© <span id="year"></span> GoDown.</p>
+      <p>&copy; <span id="year"></span> GoDown.</p>
       <p><a href="index.html">Back to Home</a></p>
     </div>
   </footer>
@@ -123,7 +126,24 @@
   </div>
 
   <script>document.getElementById('year').textContent=new Date().getFullYear();let cart=[];const list=document.getElementById('order-items'),empty=document.getElementById('order-empty'),total=document.getElementById('order-total'),popup=document.getElementById('order-popup');document.querySelectorAll('.add-btn').forEach(b=>b.onclick=()=>{cart.push({n:b.dataset.item,p:Number(b.dataset.price)});list.innerHTML=cart.map(x=>'<li class="order-item">'+x.n+' - KES '+x.p.toLocaleString()+'</li>').join('');empty.style.display='none';total.textContent='KES '+cart.reduce((a,x)=>a+x.p,0).toLocaleString();});document.getElementById('order-popup-close').onclick=()=>popup.classList.remove('show');popup.onclick=e=>{if(e.target===popup)popup.classList.remove('show')};document.getElementById('order-form').onsubmit=e=>{e.preventDefault();if(!cart.length)return;popup.classList.add('show');cart=[];list.innerHTML='';empty.style.display='block';total.textContent='KES 0';e.target.reset();};</script>
-<script>(function(){const form=document.getElementById("order-form"),popup=document.getElementById("order-popup"),msg=document.getElementById("order-popup-message"),list=document.getElementById("order-items"),empty=document.getElementById("order-empty"),total=document.getElementById("order-total");if(!form||!popup||!msg)return;form.onsubmit=function(e){e.preventDefault();const hasItems=list.children.length>0;if(!hasItems){msg.textContent="Please add at least one food item before placing your order.";popup.classList.add("show");return;}const orderType=(document.getElementById("delivery-type").value||"Order");msg.textContent="Success. Your "+orderType+" order has been received.";popup.classList.add("show");if(typeof cart!=="undefined")cart.length=0;list.innerHTML="";empty.style.display="block";total.textContent="KES 0";form.reset();};})();</script></body>
+<script>(function(){const form=document.getElementById("order-form"),popup=document.getElementById("order-popup"),msg=document.getElementById("order-popup-message"),list=document.getElementById("order-items"),empty=document.getElementById("order-empty"),total=document.getElementById("order-total");if(!form||!popup||!msg)return;form.onsubmit=function(e){e.preventDefault();const hasItems=list.children.length>0;if(!hasItems){msg.textContent="Please add at least one food item before placing your order.";popup.classList.add("show");return;}const orderType=(document.getElementById("delivery-type").value||"Order");msg.textContent="Success. Your "+orderType+" order has been received.";popup.classList.add("show");if(typeof cart!=="undefined")cart.length=0;list.innerHTML="";empty.style.display="block";total.textContent="KES 0";form.reset();};})();</script><script>
+  (function () {
+    const themeToggle = document.getElementById('theme-toggle');
+    const applyTheme = (theme) => {
+      document.body.setAttribute('data-theme', theme);
+      if (themeToggle) themeToggle.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
+    };
+    const savedTheme = localStorage.getItem('godown-theme') || 'dark';
+    applyTheme(savedTheme);
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const nextTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem('godown-theme', nextTheme);
+        applyTheme(nextTheme);
+      });
+    }
+  })();
+</script></body>
 </html>
 
 
